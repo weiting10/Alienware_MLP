@@ -1,5 +1,5 @@
 # Example command line, sample interval and duration are in units of seconds
-# python ~/MLPlot_buffer.py --duration 50 --poll-interval 0.1 --output ~/mlp_gpu_power.csv --plot-output ~/mlp_gpu_power.png --no-show
+# python ~/MLPlot.py --duration 50 --poll-interval 0.1 --output ~/mlp_gpu_power.csv --plot-output ~/mlp_gpu_power.png --no-show
 
 # Records GPU power from the driver's sample buffer (nvmlDeviceGetSamples),
 # which gives a real sample every ~20 ms with the driver's own timestamps.
