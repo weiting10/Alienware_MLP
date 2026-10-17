@@ -1,5 +1,10 @@
 # Example command line, sample interval and duration are in units of seconds
-# python MLPlot.py --duration 60 --sample-interval 0.1 --output trace.csv
+# python ~/MLPlot_buffer.py --duration 50 --poll-interval 0.1 --output ~/mlp_gpu_power.csv --plot-output ~/mlp_gpu_power.png --no-show
+
+# Records GPU power from the driver's sample buffer (nvmlDeviceGetSamples),
+# which gives a real sample every ~20 ms with the driver's own timestamps.
+# Example command line, poll interval and duration are in units of seconds:
+# python MLPlot_buffer.py --duration 60 --poll-interval 0.1 --output trace.csv
 
 import argparse
 import csv
@@ -12,7 +17,7 @@ import pynvml
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Record GPU power readings to a CSV file and plot them."
+        description="Record GPU power from the NVML sample buffer to a CSV file and plot it."
     )
     parser.add_argument(
         "--duration",
@@ -21,10 +26,11 @@ def parse_args():
         help="Recording duration in seconds (default: 30).",
     )
     parser.add_argument(
-        "--sample-interval",
+        "--poll-interval",
         type=float,
-        default=0.02,
-        help="Time between readings in seconds (default: 0.02).",
+        default=0.1,
+        help="How often to read new samples from the buffer, in seconds (default: 0.1). "
+             "This does not change the sampling rate; the driver decides that.",
     )
     parser.add_argument(
         "--output",
@@ -44,9 +50,18 @@ def parse_args():
 
     if args.duration <= 0:
         parser.error("--duration must be greater than 0")
-    if args.sample_interval <= 0:
-        parser.error("--sample-interval must be greater than 0")
+    if args.poll_interval <= 0:
+        parser.error("--poll-interval must be greater than 0")
     return args
+
+
+def read_new_samples(gpu, last_ts):
+    """Return [(driver_time_us, watts), ...] for samples newer than last_ts."""
+    try:
+        _, samples = pynvml.nvmlDeviceGetSamples(gpu, pynvml.NVML_TOTAL_POWER_SAMPLES, last_ts)
+    except pynvml.NVMLError_NotFound:
+        return []  # no new samples since last_ts
+    return [(s.timeStamp, s.sampleValue.uiVal / 1000) for s in samples if s.timeStamp > last_ts]
 
 
 def plot_power_trace(csv_path, plot_path, show=True):
@@ -62,8 +77,8 @@ def plot_power_trace(csv_path, plot_path, show=True):
         raise ValueError(f"No GPU power samples found in {csv_path}.")
 
     fig, ax = plt.subplots()
-    ax.plot(time_s, power_w)
-    ax.set_title("GPU Power Consumption Over Time")
+    ax.plot(time_s, power_w, marker=".", markersize=2)
+    ax.set_title("GPU Power Consumption Over Time (NVML sample buffer)")
     ax.set_xlabel("Time (s)")
     ax.set_ylabel("Power (W)")
     ax.grid(True)
@@ -77,23 +92,37 @@ def plot_power_trace(csv_path, plot_path, show=True):
 def main():
     args = parse_args()
     pynvml.nvmlInit()
+    count = 0
     try:
         gpu = pynvml.nvmlDeviceGetHandleByIndex(0)
 
+        # Skip samples that were already in the buffer before we started.
+        old = read_new_samples(gpu, 0)
+        last_ts = old[-1][0] if old else 0
+        first_ts = None
+
         with open(args.output, "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["time_s", "power_w"])
+            writer.writerow(["time_s", "power_w", "driver_time_us"])
 
             start = time.perf_counter()
             while time.perf_counter() - start < args.duration:
-                elapsed = time.perf_counter() - start
-                power = pynvml.nvmlDeviceGetPowerUsage(gpu) / 1000
-                writer.writerow([elapsed, power])
-                time.sleep(args.sample_interval)
+                for ts, power in read_new_samples(gpu, last_ts):
+                    if first_ts is None:
+                        first_ts = ts
+                    writer.writerow([(ts - first_ts) / 1e6, power, ts])
+                    last_ts = ts
+                    count += 1
+                time.sleep(args.poll_interval)
     finally:
         pynvml.nvmlShutdown()
 
-    print(f"GPU power trace saved to {args.output}.")
+    if count == 0:
+        print("No power samples came from the buffer. This GPU/driver may not support "
+              "NVML_TOTAL_POWER_SAMPLES (e.g. some laptop GPUs).")
+        return
+
+    print(f"GPU power trace saved to {args.output} ({count} samples).")
     plot_path = args.plot_output or str(Path(args.output).with_suffix(".png"))
     plot_power_trace(args.output, plot_path, show=not args.no_show)
 
