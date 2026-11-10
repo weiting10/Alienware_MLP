@@ -1,0 +1,191 @@
+/home/UR.Rochester.edu/wtan10/Desktop/Alienware_MLP/.venv/lib64/python3.9/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+using window 4 s, idle 0.5 s, grid 20 ms from released_out
+mlp: 26 networks, 130 traces in total; 0 already done; 130 to run.
+estimated time: ~0.3 h
+GPU: NVIDIA GeForce RTX 4090  driver 615.71.09  power limit 450.0 W
+window: 4 s after the pass starts -> 225 points per trace
+[network 1/26] mlp_L4_W2048: 5 traces
+    in       784 b   256:      0.88 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.14 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.91 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.79 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.08 ms, 0 samples during pass, mean - W
+    5/130 traces, elapsed 0.6 min, about 14 min left
+[network 2/26] mlp_L1_W128: 5 traces
+    in       784 b  1024:      0.71 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.60 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.56 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.64 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.63 ms, 0 samples during pass, mean - W
+    10/130 traces, elapsed 1.1 min, about 14 min left
+[network 3/26] mlp_L16_W1024: 5 traces
+    in       784 b     1:      1.78 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.47 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.43 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.43 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.54 ms, 0 samples during pass, mean - W
+    15/130 traces, elapsed 1.7 min, about 13 min left
+[network 4/26] mlp_L8_W1024: 5 traces
+    in       784 b    64:      1.04 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.00 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.99 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.00 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.07 ms, 0 samples during pass, mean - W
+    20/130 traces, elapsed 2.3 min, about 13 min left
+[network 5/26] mlp_L2_W256: 5 traces
+    in       784 b    64:      0.72 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.77 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.69 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.70 ms, 0 samples during pass, mean - W
+    25/130 traces, elapsed 2.8 min, about 12 min left
+[network 6/26] mlp_L2_W128: 5 traces
+    in       784 b    16:      0.67 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.66 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.71 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.69 ms, 0 samples during pass, mean - W
+    30/130 traces, elapsed 3.4 min, about 11 min left
+[network 7/26] mlp_L2_W512: 5 traces
+    in       784 b     1:      0.62 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.72 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.48 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.66 ms, 0 samples during pass, mean - W
+    35/130 traces, elapsed 4.0 min, about 11 min left
+[network 8/26] mlp_L4_W128: 5 traces
+    in       784 b   256:      0.84 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.82 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.93 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.83 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.78 ms, 0 samples during pass, mean - W
+    40/130 traces, elapsed 4.5 min, about 10 min left
+[network 9/26] mlp_L16_W512: 5 traces
+    in       784 b  1024:      1.59 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.46 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.19 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.48 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.34 ms, 0 samples during pass, mean - W
+    45/130 traces, elapsed 5.1 min, about 10 min left
+[network 10/26] mlp_L16_W128: 5 traces
+    in       784 b    16:      1.27 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.62 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.41 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.71 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.32 ms, 0 samples during pass, mean - W
+    50/130 traces, elapsed 5.7 min, about 9 min left
+[network 11/26] mlp_L1_W2048: 5 traces
+    in       784 b   256:      0.67 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.67 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.63 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.63 ms, 0 samples during pass, mean - W
+    55/130 traces, elapsed 6.3 min, about 9 min left
+[network 12/26] mlp_L1_W512: 5 traces
+    in       784 b    64:      0.64 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.62 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.72 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.62 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.60 ms, 0 samples during pass, mean - W
+    60/130 traces, elapsed 6.8 min, about 8 min left
+[network 13/26] mlp_L16_W256: 5 traces
+    in       784 b   256:      1.49 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.66 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.33 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.39 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.46 ms, 0 samples during pass, mean - W
+    65/130 traces, elapsed 7.4 min, about 7 min left
+[network 14/26] mlp_L1_W1024: 5 traces
+    in       784 b   256:      0.56 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.76 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.64 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.64 ms, 0 samples during pass, mean - W
+    70/130 traces, elapsed 8.0 min, about 7 min left
+[network 15/26] mlp_L8_W512: 5 traces
+    in       784 b   256:      1.08 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.17 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.02 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.01 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.24 ms, 0 samples during pass, mean - W
+    75/130 traces, elapsed 8.5 min, about 6 min left
+[network 16/26] mlp_L4_W256: 5 traces
+    in       784 b  1024:      0.83 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.80 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.72 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.79 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.91 ms, 0 samples during pass, mean - W
+    80/130 traces, elapsed 9.1 min, about 6 min left
+[network 17/26] mlp_L8_W2048: 5 traces
+    in       784 b    64:      1.06 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.03 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.87 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.98 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.99 ms, 0 samples during pass, mean - W
+    85/130 traces, elapsed 9.7 min, about 5 min left
+[network 18/26] mlp_L2_W2048: 5 traces
+    in       784 b     1:      0.69 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.66 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.65 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.76 ms, 0 samples during pass, mean - W
+    90/130 traces, elapsed 10.2 min, about 5 min left
+[network 19/26] weiting_mlp_784-250-100-10: 5 traces
+    in       784 b  1024:      0.72 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.24 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.70 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.68 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.62 ms, 0 samples during pass, mean - W
+    95/130 traces, elapsed 10.8 min, about 4 min left
+[network 20/26] mlp_L8_W128: 5 traces
+    in       784 b    16:      1.09 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.02 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.94 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.22 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.03 ms, 0 samples during pass, mean - W
+    100/130 traces, elapsed 11.4 min, about 3 min left
+[network 21/26] mlp_L8_W256: 5 traces
+    in       784 b    16:      1.16 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.04 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      1.10 ms, 0 samples during pass, mean - W
+    in       784 b    64:      1.02 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.97 ms, 0 samples during pass, mean - W
+    105/130 traces, elapsed 11.9 min, about 3 min left
+[network 22/26] mlp_L2_W1024: 5 traces
+    in       784 b     1:      0.69 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.67 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.66 ms, 0 samples during pass, mean - W
+    in       784 b    16:      0.79 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.47 ms, 0 samples during pass, mean - W
+    110/130 traces, elapsed 12.5 min, about 2 min left
+[network 23/26] mlp_L1_W256: 5 traces
+    in       784 b    16:      0.68 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.61 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.60 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.68 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.50 ms, 0 samples during pass, mean - W
+    115/130 traces, elapsed 13.1 min, about 2 min left
+[network 24/26] mlp_L4_W1024: 5 traces
+    in       784 b    16:      1.01 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.80 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.86 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.78 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.79 ms, 0 samples during pass, mean - W
+    120/130 traces, elapsed 13.6 min, about 1 min left
+[network 25/26] mlp_L16_W2048: 5 traces
+    in       784 b    64:      1.44 ms, 0 samples during pass, mean - W
+    in       784 b   256:      1.52 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      3.53 ms, 0 samples during pass, mean - W
+    in       784 b     1:      1.33 ms, 0 samples during pass, mean - W
+    in       784 b    16:      1.44 ms, 0 samples during pass, mean - W
+    125/130 traces, elapsed 14.2 min, about 1 min left
+[network 26/26] mlp_L4_W512: 5 traces
+    in       784 b    16:      0.78 ms, 0 samples during pass, mean - W
+    in       784 b  1024:      0.93 ms, 0 samples during pass, mean - W
+    in       784 b   256:      0.81 ms, 0 samples during pass, mean - W
+    in       784 b     1:      0.78 ms, 0 samples during pass, mean - W
+    in       784 b    64:      0.81 ms, 0 samples during pass, mean - W
+    130/130 traces, elapsed 14.8 min, about 0 min left
+
+done: 130 new traces this session; manifest: mlp_out/manifest.csv

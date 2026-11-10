@@ -1,0 +1,80 @@
+/home/UR.Rochester.edu/wtan10/Desktop/Alienware_MLP/.venv/lib64/python3.9/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+using window 4 s, idle 0.5 s, grid 20 ms from released_out
+cnn: 30 networks, 710 traces in total; 0 already done; 710 to run.
+estimated time: ~1.5 h
+GPU: NVIDIA GeForce RTX 4090  driver 615.71.09  power limit 450.0 W
+window: 4 s after the pass starts -> 225 points per trace
+[network 1/30] vgg13_bn: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 2/30] resnet50: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 3/30] mobilenet_v3_large: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 4/30] mobilenet_v3_small: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 5/30] vgg16_bn: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 6/30] vgg11: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 7/30] vgg19_bn: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 8/30] densenet201: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 9/30] vggnet7_float: 5 traces
+    in   3x32x32 b     4:      2.97 ms, 0 samples during pass, mean - W
+    in   3x32x32 b    32:      2.70 ms, 0 samples during pass, mean - W
+    in   3x32x32 b     1:      2.56 ms, 0 samples during pass, mean - W
+    in   3x32x32 b    16:      3.00 ms, 0 samples during pass, mean - W
+    in   3x32x32 b    64:      2.63 ms, 0 samples during pass, mean - W
+    5/710 traces, elapsed 0.6 min, about 81 min left
+[network 10/30] mobilenet_v2_x0.75: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 11/30] efficientnet_b1: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 12/30] densenet169: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 13/30] efficientnet_b2: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 14/30] vgg13: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 15/30] efficientnet_b0: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 16/30] vgg16: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 17/30] efficientnet_b4: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 18/30] vgg19: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 19/30] resnet101: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 20/30] efficientnet_b3: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 21/30] resnet34: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 22/30] lenet5_float: 5 traces
+    in   1x28x28 b    32:      1.56 ms, 0 samples during pass, mean - W
+    in   1x28x28 b    64:      1.55 ms, 0 samples during pass, mean - W
+    in   1x28x28 b     4:      1.69 ms, 0 samples during pass, mean - W
+    in   1x28x28 b     1:      1.54 ms, 0 samples during pass, mean - W
+    in   1x28x28 b    16:      1.56 ms, 0 samples during pass, mean - W
+    10/710 traces, elapsed 1.1 min, about 80 min left
+[network 23/30] mobilenet_v2_x1: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 24/30] mobilenet_v2_x1.4: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 25/30] resnet18: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 26/30] vgg11_bn: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 27/30] mobilenet_v2_x0.5: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 28/30] densenet121: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 29/30] resnet152: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+[network 30/30] densenet161: 25 traces
+    error while building: ModuleNotFoundError: No module named 'torchvision'
+
+done: 10 new traces this session; manifest: cnn_out/manifest.csv
+700 traces failed (out of memory or error), e.g. ['vgg13_bn_in3x64x64_b64_r1', 'vgg13_bn_in3x288x288_b32_r1', 'vgg13_bn_in3x64x64_b32_r1']; see the manifest

@@ -1,0 +1,12 @@
+label: model_type   split: random   dataset: all_models.csv
+train 1398 / validation 301 / test 301 traces
+best epoch 9 of 21
+
+TEST ACCURACY: 88.0%
+balanced accuracy (mean recall over classes): 58.1%
+
+class                          precision  recall     f1  test traces
+bnn                                 0.39    0.39   0.39           28
+cnn                                 0.00    0.00   0.00            2
+mlp                                 0.54    1.00   0.70           20
+transformer                         0.99    0.93   0.96          251
