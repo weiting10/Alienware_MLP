@@ -271,7 +271,10 @@ def describe(r):
     if r.get("kind") == "forward":            # MLP / BNN / CNN rows written by sweep_nn.py
         line1 = (f"{r['model']}  ({r['model_type'].upper()}, {r['family']})  |  {r.get('arch_desc') or ''}  |  "
                  f"{float(r['params_m']):.2f}M params  |  {r.get('weights') or 'random'} weights  |  {r['dtype']}")
-        work = f"single forward pass, input {r.get('input_shape') or r['input_len']}, batch {r['batch']}"
+        passes = int(float(r.get("passes") or 1))
+        what = ("single forward pass" if passes == 1 else
+                f"{passes} back-to-back forward passes ({float(r.get('pass_ms') or 0):.2f} ms each)")
+        work = f"{what}, input {r.get('input_shape') or r['input_len']}, batch {r['batch']}"
         return line1, work
     name = r["model"] if r["source"] == "released" else f"{r['family'].upper()} random architecture"
     line1 = (f"{name}  ({r['family']}, {KIND_NAMES.get(r['kind'], r['kind'])})  |  {r['layers']} layers  |  "

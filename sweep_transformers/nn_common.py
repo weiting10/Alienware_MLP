@@ -18,7 +18,7 @@ import torch
 
 import sweep as S          # sweep.py in the same folder: power recorder, resampling, plotting
 
-FIELDS = S.MANIFEST_FIELDS + ["input_shape", "weights", "arch_desc"]
+FIELDS = S.MANIFEST_FIELDS + ["input_shape", "weights", "arch_desc", "passes", "pass_ms"]
 
 
 # =========================================================================== BNN repo helpers
@@ -155,6 +155,7 @@ def measure_window(plan, args, device):
         finally:
             del model
             S.free(device)
+    slowest = max(slowest, (args.repeat_ms or 0) / 1000)      # repeated runs last about repeat_ms
     return float(max(1.0, -(-(slowest * 1.5 + 0.5) * 2 // 1) / 2))
 
 
@@ -184,7 +185,9 @@ def common_args(description, default_batch, default_out):
     w.add_argument("--cooldown", type=float, default=2.0, help="idle seconds after each warm-up")
     w.add_argument("--ymax", type=float, default=None, help="plot y-axis top")
     o = p.add_argument_group("running")
-    o.add_argument("--out", default=default_out, help="output folder")
+    o.add_argument("--out", default=None,
+                   help=f"output folder (default: {default_out}, or {default_out.replace('_out', '_repeat_out')} "
+                        f"with --repeat-ms / --repeat-count)")
     o.add_argument("--device", default="cuda")
     o.add_argument("--seed", type=int, default=0, help="seed for the shuffled run order")
     o.add_argument("--no-shuffle", action="store_true")
@@ -195,12 +198,23 @@ def common_args(description, default_batch, default_out):
     o.add_argument("--limit", type=int, default=None, help="stop after this many new traces")
     o.add_argument("--dry-run", action="store_true", help="list the runs and estimated time, then exit")
     o.add_argument("--replot", action="store_true", help="redraw all plots from saved traces, then exit")
+    r = p.add_argument_group("repeated passes (makes short networks visible to the power sensor)")
+    r.add_argument("--repeat-ms", type=float, default=0,
+                   help="run the same forward pass back-to-back for about this many milliseconds in each "
+                        "recording (e.g. 1000). 0 = a single pass")
+    r.add_argument("--repeat-count", type=int, default=0,
+                   help="instead of --repeat-ms: run exactly this many back-to-back passes per recording")
+    p.set_defaults(default_out=default_out)
     return p
 
 
 def finish_args(args, mtype):
     args.type = mtype
     args.batch = sorted(args.batch)
+    if args.repeat_ms and args.repeat_count:
+        sys.exit("use either --repeat-ms or --repeat-count, not both")
+    repeating = bool(args.repeat_ms or args.repeat_count)
+    args.out = args.out or (args.default_out.replace("_out", "_repeat_out") if repeating else args.default_out)
     if args.pilot:
         args.out += "_pilot"
     args.torch_dtype = {"fp32": torch.float32, "fp16": torch.float16, "bf16": torch.bfloat16}[args.dtype]
@@ -228,6 +242,9 @@ def run(args, make_specs):
         args.window = None
     else:
         args.window = float(args.window)
+    if args.window and args.repeat_ms and args.repeat_ms / 1000 > args.window - 0.3:
+        sys.exit(f"--repeat-ms {args.repeat_ms:g} doesn't fit in the {args.window:g} s window; "
+                 f"use a smaller --repeat-ms (at most about {(args.window - 0.3) * 1000:.0f})")
 
     if args.replot:
         rows = [r for r in previous if r["status"] == "ok"]
@@ -322,15 +339,34 @@ def run(args, make_specs):
                 try:
                     x = make_input(spec, wl, device, args.torch_dtype)
 
-                    def infer():
+                    def one_pass():
                         with torch.inference_mode():
                             model(x)
 
                     if wl != last_wl:
-                        infer()
+                        one_pass()                      # warm-up (not recorded)
                         S.sync(device)
+                        # Time a single pass to decide how many back-to-back passes to record.
+                        t = time.time()
+                        for _ in range(3):
+                            one_pass()
+                        S.sync(device)
+                        pass_s = (time.time() - t) / 3
+                        if args.repeat_count:
+                            passes = args.repeat_count
+                        elif args.repeat_ms:
+                            passes = max(1, int(round(args.repeat_ms / 1000 / max(pass_s, 1e-6))))
+                        else:
+                            passes = 1
                         time.sleep(args.cooldown)
                         last_wl = wl
+
+                    def infer():
+                        # All passes are queued on the GPU without waiting in between, so they
+                        # run back-to-back; the sync after infer() waits for the last one.
+                        with torch.inference_mode():
+                            for _ in range(passes):
+                                model(x)
                     row.update(sampler.info(), started_at=datetime.now().isoformat(timespec="seconds"))
                     time.sleep(args.pre)
                     S.sync(device)
@@ -362,12 +398,14 @@ def run(args, make_specs):
                             wr.writerow([f"{(t - t0) * 1000:.1f}", f"{v:.3f}", int(round(t * 1e6))])
 
                     row.update(status="ok", run_ms=round(run_s * 1000, 2), truncated=run_s > args.window,
+                               passes=passes, pass_ms=round(pass_s * 1000, 3),
                                raw_samples=len(in_win), max_gap_ms=round(max(gaps) * 1000, 1) if gaps else "",
                                idle_w=round(idle[len(idle) // 2], 2) if idle else "",
                                mean_run_w=round(sum(run) / len(run), 2) if run else "")
                     append(manifest, row)
                     n_done += 1
-                    print(f"    in {shape_tag(shape):>9s} b {batch:5d}: {row['run_ms']:9.2f} ms, "
+                    print(f"    in {shape_tag(shape):>9s} b {batch:5d}: {passes:6d} pass(es) of "
+                          f"{pass_s * 1000:8.3f} ms = {row['run_ms']:9.2f} ms, "
                           f"{len(run)} samples during pass, mean {row['mean_run_w'] or '-'} W", flush=True)
                     if not args.no_plots:
                         rs = [r for r in S.load_manifest(manifest) if r["plot_id"] == plot_id and r["status"] == "ok"]

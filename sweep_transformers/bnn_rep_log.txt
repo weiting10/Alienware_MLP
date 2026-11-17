@@ -1,0 +1,267 @@
+nohup: ignoring input
+using window 4 s, idle 0.5 s, grid 20 ms from released_out
+bnn: 37 networks, 185 traces in total; 0 already done; 185 to run.
+estimated time: ~0.4 h
+GPU: NVIDIA GeForce RTX 4090  driver 615.71.09  power limit 450.0 W
+window: 4 s after the pass starts -> 225 points per trace
+[network 1/37] bnn_mlp_L1_W128: 5 traces
+    in       784 b    16:   3025 pass(es) of    0.331 ms =    957.90 ms, 48 samples during pass, mean 53.52 W
+    in       784 b  1024:   2262 pass(es) of    0.442 ms =    975.94 ms, 49 samples during pass, mean 58.32 W
+    in       784 b     1:    865 pass(es) of    1.156 ms =    241.44 ms, 12 samples during pass, mean 53.28 W
+    in       784 b    64:   1677 pass(es) of    0.596 ms =    619.94 ms, 31 samples during pass, mean 54.23 W
+    in       784 b   256:   2117 pass(es) of    0.472 ms =    798.87 ms, 40 samples during pass, mean 55.88 W
+    5/185 traces, elapsed 0.6 min, about 21 min left
+[network 2/37] bnn_mlp_L8_W2048: 5 traces
+    in       784 b    16:    197 pass(es) of    5.075 ms =    998.88 ms, 51 samples during pass, mean 70.08 W
+    in       784 b  1024:     46 pass(es) of   21.533 ms =    989.55 ms, 50 samples during pass, mean 72.6 W
+    in       784 b    64:    181 pass(es) of    5.536 ms =   1001.70 ms, 51 samples during pass, mean 71.66 W
+    in       784 b   256:    115 pass(es) of    8.723 ms =   1002.81 ms, 50 samples during pass, mean 71.23 W
+    in       784 b     1:    231 pass(es) of    4.321 ms =    996.53 ms, 51 samples during pass, mean 70.39 W
+    10/185 traces, elapsed 1.1 min, about 20 min left
+[network 3/37] bnn_mlp_L4_W2048: 5 traces
+    in       784 b    64:    370 pass(es) of    2.704 ms =    998.46 ms, 50 samples during pass, mean 69.91 W
+    in       784 b     1:    470 pass(es) of    2.128 ms =    982.39 ms, 49 samples during pass, mean 68.34 W
+    in       784 b    16:    396 pass(es) of    2.525 ms =    990.48 ms, 50 samples during pass, mean 67.87 W
+    in       784 b   256:    237 pass(es) of    4.211 ms =    996.10 ms, 51 samples during pass, mean 70.02 W
+    in       784 b  1024:     99 pass(es) of   10.106 ms =    998.72 ms, 51 samples during pass, mean 71.4 W
+    15/185 traces, elapsed 1.7 min, about 19 min left
+[network 4/37] bnn_mlp_L16_W256: 5 traces
+    in       784 b    16:    326 pass(es) of    3.068 ms =    995.25 ms, 50 samples during pass, mean 52.24 W
+    in       784 b  1024:    224 pass(es) of    4.469 ms =   1001.28 ms, 50 samples during pass, mean 56.98 W
+    in       784 b   256:    273 pass(es) of    3.660 ms =   1000.01 ms, 51 samples during pass, mean 54.04 W
+    in       784 b     1:    361 pass(es) of    2.772 ms =   1001.10 ms, 50 samples during pass, mean 52.13 W
+    in       784 b    64:    289 pass(es) of    3.460 ms =   1001.18 ms, 51 samples during pass, mean 52.18 W
+    20/185 traces, elapsed 2.3 min, about 19 min left
+[network 5/37] bnn_mlp_L16_W512: 5 traces
+    in       784 b     1:    314 pass(es) of    3.189 ms =   1002.23 ms, 51 samples during pass, mean 53.36 W
+    in       784 b   256:    220 pass(es) of    4.541 ms =    999.20 ms, 50 samples during pass, mean 56.87 W
+    in       784 b    64:    257 pass(es) of    3.889 ms =   1000.07 ms, 51 samples during pass, mean 54.94 W
+    in       784 b  1024:    141 pass(es) of    7.070 ms =    996.72 ms, 50 samples during pass, mean 62.37 W
+    in       784 b    16:    272 pass(es) of    3.674 ms =    999.09 ms, 50 samples during pass, mean 53.86 W
+    25/185 traces, elapsed 2.9 min, about 18 min left
+[network 6/37] bnn_mlp_L8_W512: 5 traces
+    in       784 b   256:    422 pass(es) of    2.370 ms =    998.53 ms, 50 samples during pass, mean 56.68 W
+    in       784 b    64:    489 pass(es) of    2.047 ms =   1000.08 ms, 50 samples during pass, mean 54.5 W
+    in       784 b    16:    523 pass(es) of    1.913 ms =    998.40 ms, 51 samples during pass, mean 53.62 W
+    in       784 b  1024:    271 pass(es) of    3.690 ms =    999.78 ms, 50 samples during pass, mean 62.07 W
+    in       784 b     1:    605 pass(es) of    1.653 ms =    999.45 ms, 50 samples during pass, mean 52.63 W
+    30/185 traces, elapsed 3.4 min, about 18 min left
+[network 7/37] bnn_vggnet7_w2: 5 traces
+    in   3x32x32 b  1024:      1 pass(es) of  754.567 ms =    755.23 ms, 38 samples during pass, mean 68.88 W
+    in   3x32x32 b    16:     53 pass(es) of   18.765 ms =    995.63 ms, 50 samples during pass, mean 66.72 W
+    in   3x32x32 b   256:      5 pass(es) of  205.023 ms =   1025.72 ms, 51 samples during pass, mean 69.4 W
+    in   3x32x32 b    64:     17 pass(es) of   59.373 ms =   1009.99 ms, 51 samples during pass, mean 66.12 W
+    in   3x32x32 b     1:    159 pass(es) of    6.275 ms =    997.19 ms, 50 samples during pass, mean 76.02 W
+    35/185 traces, elapsed 4.1 min, about 17 min left
+[network 8/37] bnn_vggnet7_w0.25: 5 traces
+    in   3x32x32 b    16:    393 pass(es) of    2.547 ms =    998.15 ms, 50 samples during pass, mean 56.28 W
+    in   3x32x32 b  1024:     29 pass(es) of   34.293 ms =    994.80 ms, 50 samples during pass, mean 85.39 W
+    in   3x32x32 b   256:     96 pass(es) of   10.429 ms =   1000.97 ms, 51 samples during pass, mean 68.65 W
+    in   3x32x32 b    64:    224 pass(es) of    4.460 ms =    998.38 ms, 50 samples during pass, mean 60.09 W
+    in   3x32x32 b     1:    465 pass(es) of    2.150 ms =   1000.79 ms, 51 samples during pass, mean 54.05 W
+    40/185 traces, elapsed 4.6 min, about 17 min left
+[network 9/37] bnn_mlp_L2_W512: 5 traces
+    in       784 b   256:   1363 pass(es) of    0.734 ms =    993.66 ms, 51 samples during pass, mean 57.74 W
+    in       784 b     1:   1328 pass(es) of    0.753 ms =    665.90 ms, 34 samples during pass, mean 53.44 W
+    in       784 b    16:   1310 pass(es) of    0.763 ms =    771.47 ms, 39 samples during pass, mean 54.03 W
+    in       784 b    64:   1178 pass(es) of    0.849 ms =    764.26 ms, 39 samples during pass, mean 55.56 W
+    in       784 b  1024:    850 pass(es) of    1.176 ms =    992.12 ms, 50 samples during pass, mean 62.93 W
+    45/185 traces, elapsed 5.2 min, about 16 min left
+[network 10/37] bnn_mlp_L2_W128: 5 traces
+    in       784 b    64:   1712 pass(es) of    0.584 ms =    991.76 ms, 50 samples during pass, mean 52.96 W
+    in       784 b     1:   2289 pass(es) of    0.437 ms =    989.42 ms, 50 samples during pass, mean 51.99 W
+    in       784 b    16:    971 pass(es) of    1.030 ms =    476.13 ms, 24 samples during pass, mean 52.3 W
+    in       784 b   256:   1713 pass(es) of    0.584 ms =    984.89 ms, 50 samples during pass, mean 54.06 W
+    in       784 b  1024:   1552 pass(es) of    0.644 ms =    990.34 ms, 50 samples during pass, mean 57.02 W
+    50/185 traces, elapsed 5.8 min, about 16 min left
+[network 11/37] bnn_mlp_L4_W128: 5 traces
+    in       784 b   256:   1022 pass(es) of    0.978 ms =    996.30 ms, 50 samples during pass, mean 54.15 W
+    in       784 b  1024:    945 pass(es) of    1.058 ms =    995.73 ms, 50 samples during pass, mean 55.72 W
+    in       784 b     1:   1286 pass(es) of    0.777 ms =    963.65 ms, 49 samples during pass, mean 51.76 W
+    in       784 b    16:   1199 pass(es) of    0.834 ms =    997.47 ms, 50 samples during pass, mean 52.05 W
+    in       784 b    64:    995 pass(es) of    1.005 ms =   1002.57 ms, 51 samples during pass, mean 52.99 W
+    55/185 traces, elapsed 6.3 min, about 15 min left
+[network 12/37] bnn_mlp_L4_W1024: 5 traces
+    in       784 b   256:    509 pass(es) of    1.966 ms =    997.09 ms, 50 samples during pass, mean 62.76 W
+    in       784 b  1024:    270 pass(es) of    3.703 ms =    993.73 ms, 50 samples during pass, mean 66.73 W
+    in       784 b    16:    701 pass(es) of    1.426 ms =    967.79 ms, 48 samples during pass, mean 57.32 W
+    in       784 b    64:    658 pass(es) of    1.519 ms =    999.62 ms, 50 samples during pass, mean 59.39 W
+    in       784 b     1:    879 pass(es) of    1.138 ms =    996.57 ms, 50 samples during pass, mean 56.99 W
+    60/185 traces, elapsed 6.9 min, about 14 min left
+[network 13/37] bnn_vggnet7_trained: 5 traces
+    in   3x32x32 b   256:     15 pass(es) of   66.017 ms =    990.82 ms, 50 samples during pass, mean 72.19 W
+    in   3x32x32 b    64:     52 pass(es) of   19.075 ms =    991.81 ms, 50 samples during pass, mean 64.45 W
+    in   3x32x32 b  1024:      4 pass(es) of  229.230 ms =    917.57 ms, 46 samples during pass, mean 78.37 W
+    in   3x32x32 b    16:    126 pass(es) of    7.966 ms =   1004.29 ms, 51 samples during pass, mean 61.02 W
+    in   3x32x32 b     1:    295 pass(es) of    3.390 ms =   1000.24 ms, 50 samples during pass, mean 59.84 W
+    65/185 traces, elapsed 7.5 min, about 14 min left
+[network 14/37] bnn_mlp_L1_W256: 5 traces
+    in       784 b  1024:   1875 pass(es) of    0.533 ms =    990.50 ms, 50 samples during pass, mean 60.56 W
+    in       784 b    16:   2101 pass(es) of    0.476 ms =    707.98 ms, 36 samples during pass, mean 53.56 W
+    in       784 b    64:   2079 pass(es) of    0.481 ms =    812.64 ms, 41 samples during pass, mean 54.2 W
+    in       784 b   256:   2435 pass(es) of    0.411 ms =    987.90 ms, 50 samples during pass, mean 56.21 W
+    in       784 b     1:   2275 pass(es) of    0.440 ms =    660.47 ms, 34 samples during pass, mean 52.98 W
+    70/185 traces, elapsed 8.1 min, about 13 min left
+[network 15/37] bnn_lenet5_w4: 5 traces
+    in   1x28x28 b    64:    238 pass(es) of    4.202 ms =    995.58 ms, 50 samples during pass, mean 63.95 W
+    in   1x28x28 b   256:     76 pass(es) of   13.143 ms =    998.88 ms, 51 samples during pass, mean 68.1 W
+    in   1x28x28 b     1:    699 pass(es) of    1.430 ms =    997.75 ms, 51 samples during pass, mean 57.49 W
+    in   1x28x28 b    16:    416 pass(es) of    2.405 ms =    999.44 ms, 50 samples during pass, mean 58.77 W
+    in   1x28x28 b  1024:     25 pass(es) of   40.570 ms =   1014.92 ms, 51 samples during pass, mean 76.05 W
+    75/185 traces, elapsed 8.6 min, about 13 min left
+[network 16/37] bnn_mlp_L16_W1024: 5 traces
+    in       784 b     1:    232 pass(es) of    4.311 ms =   1001.69 ms, 50 samples during pass, mean 61.07 W
+    in       784 b   256:    133 pass(es) of    7.520 ms =   1000.56 ms, 50 samples during pass, mean 64.54 W
+    in       784 b    16:    193 pass(es) of    5.173 ms =    999.00 ms, 50 samples during pass, mean 60.69 W
+    in       784 b    64:    175 pass(es) of    5.707 ms =    998.72 ms, 50 samples during pass, mean 62.03 W
+    in       784 b  1024:     68 pass(es) of   14.672 ms =    997.97 ms, 51 samples during pass, mean 68.94 W
+    80/185 traces, elapsed 9.2 min, about 12 min left
+[network 17/37] bnn_mlp_L2_W1024: 5 traces
+    in       784 b  1024:    535 pass(es) of    1.870 ms =   1002.92 ms, 50 samples during pass, mean 66.84 W
+    in       784 b   256:    964 pass(es) of    1.037 ms =    996.89 ms, 50 samples during pass, mean 62.78 W
+    in       784 b    16:   1296 pass(es) of    0.772 ms =    967.29 ms, 49 samples during pass, mean 56.66 W
+    in       784 b     1:   1508 pass(es) of    0.663 ms =    911.49 ms, 46 samples during pass, mean 56.41 W
+    in       784 b    64:   1189 pass(es) of    0.841 ms =    971.82 ms, 49 samples during pass, mean 58.57 W
+    85/185 traces, elapsed 9.8 min, about 12 min left
+[network 18/37] bnn_mlp_L1_W1024: 5 traces
+    in       784 b    16:   2267 pass(es) of    0.441 ms =    987.80 ms, 50 samples during pass, mean 55.24 W
+    in       784 b  1024:   1068 pass(es) of    0.936 ms =    993.04 ms, 50 samples during pass, mean 67.98 W
+    in       784 b     1:   1709 pass(es) of    0.585 ms =    588.30 ms, 30 samples during pass, mean 54.99 W
+    in       784 b    64:   1842 pass(es) of    0.543 ms =    872.32 ms, 44 samples during pass, mean 57.55 W
+    in       784 b   256:   1726 pass(es) of    0.579 ms =    988.85 ms, 50 samples during pass, mean 61.08 W
+    90/185 traces, elapsed 10.3 min, about 11 min left
+[network 19/37] bnn_mlp_L16_W128: 5 traces
+    in       784 b    16:    347 pass(es) of    2.884 ms =   1001.11 ms, 51 samples during pass, mean 51.75 W
+    in       784 b   256:    297 pass(es) of    3.368 ms =   1000.73 ms, 50 samples during pass, mean 52.28 W
+    in       784 b  1024:    282 pass(es) of    3.548 ms =   1001.22 ms, 51 samples during pass, mean 54.42 W
+    in       784 b    64:    284 pass(es) of    3.525 ms =   1001.64 ms, 51 samples during pass, mean 53.03 W
+    in       784 b     1:    379 pass(es) of    2.638 ms =   1000.67 ms, 51 samples during pass, mean 51.62 W
+    95/185 traces, elapsed 10.9 min, about 10 min left
+[network 20/37] bnn_lenet5_w3: 5 traces
+    in   1x28x28 b     1:    807 pass(es) of    1.239 ms =    998.65 ms, 50 samples during pass, mean 56.26 W
+    in   1x28x28 b  1024:     37 pass(es) of   26.838 ms =    993.34 ms, 50 samples during pass, mean 79.66 W
+    in   1x28x28 b   256:    136 pass(es) of    7.340 ms =    997.49 ms, 51 samples during pass, mean 71.57 W
+    in   1x28x28 b    16:    500 pass(es) of    2.002 ms =    973.32 ms, 49 samples during pass, mean 59.67 W
+    in   1x28x28 b    64:    313 pass(es) of    3.191 ms =    997.33 ms, 50 samples during pass, mean 61.61 W
+    100/185 traces, elapsed 11.5 min, about 10 min left
+[network 21/37] bnn_mlp_L1_W2048: 5 traces
+    in       784 b    16:   1718 pass(es) of    0.582 ms =    989.49 ms, 50 samples during pass, mean 57.33 W
+    in       784 b    64:   1637 pass(es) of    0.611 ms =    949.13 ms, 48 samples during pass, mean 60.38 W
+    in       784 b   256:    881 pass(es) of    1.135 ms =    718.21 ms, 37 samples during pass, mean 62.71 W
+    in       784 b  1024:    656 pass(es) of    1.524 ms =    996.07 ms, 51 samples during pass, mean 70.67 W
+    in       784 b     1:   2058 pass(es) of    0.486 ms =    879.72 ms, 44 samples during pass, mean 57.95 W
+    105/185 traces, elapsed 12.1 min, about 9 min left
+[network 22/37] bnn_vggnet7_w1.5: 5 traces
+    in   3x32x32 b    16:     70 pass(es) of   14.214 ms =    994.88 ms, 50 samples during pass, mean 62.36 W
+    in   3x32x32 b    64:     27 pass(es) of   37.327 ms =   1008.54 ms, 51 samples during pass, mean 66.15 W
+    in   3x32x32 b   256:      8 pass(es) of  129.890 ms =   1039.70 ms, 52 samples during pass, mean 70.4 W
+    in   3x32x32 b  1024:      2 pass(es) of  486.797 ms =    974.10 ms, 49 samples during pass, mean 72.65 W
+    in   3x32x32 b     1:    205 pass(es) of    4.868 ms =    996.79 ms, 50 samples during pass, mean 65.56 W
+    110/185 traces, elapsed 12.7 min, about 9 min left
+[network 23/37] bnn_mlp_L2_W256: 5 traces
+    in       784 b    64:   1658 pass(es) of    0.603 ms =    985.29 ms, 50 samples during pass, mean 52.98 W
+    in       784 b   256:   1585 pass(es) of    0.631 ms =    980.96 ms, 50 samples during pass, mean 55.01 W
+    in       784 b  1024:   1255 pass(es) of    0.797 ms =    991.24 ms, 50 samples during pass, mean 58.71 W
+    in       784 b     1:   1430 pass(es) of    0.700 ms =    650.95 ms, 33 samples during pass, mean 51.94 W
+    in       784 b    16:   1801 pass(es) of    0.555 ms =    929.85 ms, 47 samples during pass, mean 52.3 W
+    115/185 traces, elapsed 13.2 min, about 8 min left
+[network 24/37] bnn_mlp_L8_W1024: 5 traces
+    in       784 b    16:    376 pass(es) of    2.660 ms =    996.65 ms, 50 samples during pass, mean 58.22 W
+    in       784 b  1024:    134 pass(es) of    7.447 ms =    994.62 ms, 51 samples during pass, mean 68.47 W
+    in       784 b   256:    261 pass(es) of    3.837 ms =    999.49 ms, 50 samples during pass, mean 65.14 W
+    in       784 b     1:    443 pass(es) of    2.257 ms =    978.16 ms, 49 samples during pass, mean 58.64 W
+    in       784 b    64:    341 pass(es) of    2.929 ms =    996.88 ms, 51 samples during pass, mean 60.0 W
+    120/185 traces, elapsed 13.8 min, about 7 min left
+[network 25/37] bnn_mlp_L4_W256: 5 traces
+    in       784 b   256:    948 pass(es) of    1.055 ms =    995.11 ms, 51 samples during pass, mean 55.0 W
+    in       784 b     1:   1197 pass(es) of    0.836 ms =    936.82 ms, 48 samples during pass, mean 52.47 W
+    in       784 b    64:    997 pass(es) of    1.003 ms =    998.45 ms, 51 samples during pass, mean 52.94 W
+    in       784 b  1024:    760 pass(es) of    1.317 ms =    998.33 ms, 50 samples during pass, mean 57.94 W
+    in       784 b    16:   1138 pass(es) of    0.879 ms =    996.13 ms, 50 samples during pass, mean 52.26 W
+    125/185 traces, elapsed 14.4 min, about 7 min left
+[network 26/37] bnn_mlp_L8_W128: 5 traces
+    in       784 b  1024:    528 pass(es) of    1.894 ms =    998.72 ms, 50 samples during pass, mean 54.32 W
+    in       784 b     1:    725 pass(es) of    1.379 ms =    999.92 ms, 50 samples during pass, mean 51.28 W
+    in       784 b    64:    543 pass(es) of    1.841 ms =   1002.30 ms, 51 samples during pass, mean 52.43 W
+    in       784 b    16:    659 pass(es) of    1.517 ms =    999.82 ms, 51 samples during pass, mean 51.12 W
+    in       784 b   256:    564 pass(es) of    1.774 ms =    999.46 ms, 50 samples during pass, mean 52.51 W
+    130/185 traces, elapsed 14.9 min, about 6 min left
+[network 27/37] bnn_mlp_L2_W2048: 5 traces
+    in       784 b    16:    814 pass(es) of    1.228 ms =    992.79 ms, 50 samples during pass, mean 62.91 W
+    in       784 b  1024:    228 pass(es) of    4.392 ms =    999.06 ms, 50 samples during pass, mean 71.85 W
+    in       784 b    64:    761 pass(es) of    1.314 ms =    980.38 ms, 49 samples during pass, mean 66.61 W
+    in       784 b   256:    511 pass(es) of    1.956 ms =    996.02 ms, 50 samples during pass, mean 67.04 W
+    in       784 b     1:    997 pass(es) of    1.004 ms =    979.92 ms, 49 samples during pass, mean 63.76 W
+    135/185 traces, elapsed 15.5 min, about 6 min left
+[network 28/37] bnn_lenet5_trained: 5 traces
+    in   1x28x28 b    16:    932 pass(es) of    1.073 ms =    985.95 ms, 49 samples during pass, mean 54.86 W
+    in   1x28x28 b  1024:    139 pass(es) of    7.213 ms =   1003.44 ms, 51 samples during pass, mean 76.14 W
+    in   1x28x28 b   256:    441 pass(es) of    2.267 ms =    997.56 ms, 50 samples during pass, mean 65.28 W
+    in   1x28x28 b     1:   1111 pass(es) of    0.900 ms =    997.77 ms, 50 samples during pass, mean 53.22 W
+    in   1x28x28 b    64:    737 pass(es) of    1.357 ms =    995.41 ms, 50 samples during pass, mean 57.34 W
+    140/185 traces, elapsed 16.1 min, about 5 min left
+[network 29/37] bnn_lenet5_w1: 5 traces
+    in   1x28x28 b   256:    441 pass(es) of    2.270 ms =   1001.27 ms, 50 samples during pass, mean 65.56 W
+    in   1x28x28 b     1:    872 pass(es) of    1.146 ms =    781.85 ms, 39 samples during pass, mean 53.43 W
+    in   1x28x28 b    16:    813 pass(es) of    1.230 ms =    861.45 ms, 44 samples during pass, mean 55.41 W
+    in   1x28x28 b  1024:    138 pass(es) of    7.222 ms =    996.58 ms, 50 samples during pass, mean 75.53 W
+    in   1x28x28 b    64:    700 pass(es) of    1.428 ms =    944.51 ms, 47 samples during pass, mean 56.74 W
+    145/185 traces, elapsed 16.6 min, about 5 min left
+[network 30/37] bnn_lenet5_w5: 5 traces
+    in   1x28x28 b    16:    324 pass(es) of    3.085 ms =    998.18 ms, 51 samples during pass, mean 61.22 W
+    in   1x28x28 b    64:    137 pass(es) of    7.309 ms =   1001.41 ms, 50 samples during pass, mean 60.79 W
+    in   1x28x28 b  1024:     17 pass(es) of   59.397 ms =   1010.54 ms, 51 samples during pass, mean 76.22 W
+    in   1x28x28 b   256:     65 pass(es) of   15.424 ms =   1002.93 ms, 51 samples during pass, mean 72.0 W
+    in   1x28x28 b     1:    650 pass(es) of    1.538 ms =    996.49 ms, 51 samples during pass, mean 60.73 W
+    150/185 traces, elapsed 17.2 min, about 4 min left
+[network 31/37] bnn_mlp_L4_W512: 5 traces
+    in       784 b     1:   1126 pass(es) of    0.888 ms =    995.85 ms, 50 samples during pass, mean 53.61 W
+    in       784 b    64:    896 pass(es) of    1.116 ms =    995.92 ms, 50 samples during pass, mean 54.78 W
+    in       784 b  1024:    497 pass(es) of    2.011 ms =    996.58 ms, 51 samples during pass, mean 62.83 W
+    in       784 b    16:    938 pass(es) of    1.066 ms =    964.63 ms, 49 samples during pass, mean 53.64 W
+    in       784 b   256:    781 pass(es) of    1.280 ms =    996.82 ms, 50 samples during pass, mean 57.3 W
+    155/185 traces, elapsed 17.8 min, about 3 min left
+[network 32/37] bnn_vggnet7_w0.5: 5 traces
+    in   3x32x32 b  1024:     12 pass(es) of   80.949 ms =    971.94 ms, 49 samples during pass, mean 83.43 W
+    in   3x32x32 b     1:    395 pass(es) of    2.531 ms =    973.99 ms, 49 samples during pass, mean 55.67 W
+    in   3x32x32 b    64:    118 pass(es) of    8.487 ms =   1001.35 ms, 50 samples during pass, mean 61.67 W
+    in   3x32x32 b    16:    251 pass(es) of    3.988 ms =   1000.03 ms, 51 samples during pass, mean 59.72 W
+    in   3x32x32 b   256:     44 pass(es) of   22.569 ms =    993.43 ms, 50 samples during pass, mean 72.45 W
+    160/185 traces, elapsed 18.4 min, about 3 min left
+[network 33/37] bnn_vggnet7_w1: 5 traces
+    in   3x32x32 b    64:     52 pass(es) of   19.054 ms =    990.93 ms, 50 samples during pass, mean 64.64 W
+    in   3x32x32 b   256:     15 pass(es) of   66.005 ms =    990.72 ms, 50 samples during pass, mean 71.97 W
+    in   3x32x32 b  1024:      4 pass(es) of  229.270 ms =    917.75 ms, 46 samples during pass, mean 77.68 W
+    in   3x32x32 b    16:    125 pass(es) of    7.973 ms =    995.95 ms, 50 samples during pass, mean 61.89 W
+    in   3x32x32 b     1:    286 pass(es) of    3.496 ms =    967.72 ms, 48 samples during pass, mean 62.01 W
+    165/185 traces, elapsed 19.0 min, about 2 min left
+[network 34/37] bnn_mlp_L8_W256: 5 traces
+    in       784 b   256:    519 pass(es) of    1.927 ms =    999.72 ms, 51 samples during pass, mean 54.64 W
+    in       784 b    16:    624 pass(es) of    1.602 ms =    999.76 ms, 51 samples during pass, mean 52.35 W
+    in       784 b     1:    693 pass(es) of    1.444 ms =    999.40 ms, 51 samples during pass, mean 52.19 W
+    in       784 b    64:    549 pass(es) of    1.820 ms =    998.50 ms, 50 samples during pass, mean 52.83 W
+    in       784 b  1024:    423 pass(es) of    2.362 ms =   1000.06 ms, 51 samples during pass, mean 57.17 W
+    170/185 traces, elapsed 19.5 min, about 2 min left
+[network 35/37] bnn_mlp_L1_W512: 5 traces
+    in       784 b   256:   2158 pass(es) of    0.463 ms =    988.32 ms, 50 samples during pass, mean 58.08 W
+    in       784 b    64:   2180 pass(es) of    0.459 ms =    907.22 ms, 46 samples during pass, mean 54.73 W
+    in       784 b  1024:   1330 pass(es) of    0.752 ms =    992.56 ms, 50 samples during pass, mean 63.38 W
+    in       784 b     1:   1751 pass(es) of    0.571 ms =    543.52 ms, 27 samples during pass, mean 53.11 W
+    in       784 b    16:   1704 pass(es) of    0.587 ms =    627.60 ms, 31 samples during pass, mean 53.3 W
+    175/185 traces, elapsed 20.1 min, about 1 min left
+[network 36/37] bnn_lenet5_w2: 5 traces
+    in   1x28x28 b     1:   1012 pass(es) of    0.988 ms =    997.58 ms, 50 samples during pass, mean 54.93 W
+    in   1x28x28 b    16:    484 pass(es) of    2.065 ms =    998.54 ms, 51 samples during pass, mean 54.59 W
+    in   1x28x28 b   256:    212 pass(es) of    4.711 ms =    997.00 ms, 50 samples during pass, mean 67.39 W
+    in   1x28x28 b    64:    411 pass(es) of    2.434 ms =    998.25 ms, 51 samples during pass, mean 57.86 W
+    in   1x28x28 b  1024:     61 pass(es) of   16.411 ms =   1001.60 ms, 50 samples during pass, mean 77.5 W
+    180/185 traces, elapsed 20.7 min, about 1 min left
+[network 37/37] bnn_mlp_L16_W2048: 5 traces
+    in       784 b    16:     97 pass(es) of   10.263 ms =    995.39 ms, 51 samples during pass, mean 69.46 W
+    in       784 b  1024:     22 pass(es) of   44.543 ms =    979.04 ms, 50 samples during pass, mean 71.9 W
+    in       784 b     1:    113 pass(es) of    8.820 ms =    997.23 ms, 50 samples during pass, mean 70.43 W
+    in       784 b    64:     89 pass(es) of   11.257 ms =   1001.75 ms, 50 samples during pass, mean 70.75 W
+    in       784 b   256:     56 pass(es) of   17.789 ms =    996.38 ms, 50 samples during pass, mean 70.97 W
+    185/185 traces, elapsed 21.2 min, about 0 min left
+
+done: 185 new traces this session; manifest: bnn_repeat_out/manifest.csv

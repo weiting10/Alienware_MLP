@@ -23,7 +23,7 @@ LABEL_COLUMNS = [
     "layers", "hidden", "heads", "params_m", "dtype",
     "tokens", "input_len", "batch", "kv_cache",
     "run_ms", "mean_run_w", "idle_w", "gpu_temp_c", "sm_clock_mhz",
-    "input_shape", "weights", "arch_desc",
+    "input_shape", "weights", "arch_desc", "passes", "pass_ms",
     "pre_s", "window_s", "grid_ms", "n_points", "folder",
 ]
 
