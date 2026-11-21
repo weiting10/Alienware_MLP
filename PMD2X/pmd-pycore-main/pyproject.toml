@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pmd-pycore"
+version = "0.2.5"
+description = "PMD PyCore - Python Interface for ElmorLabs PMD2/PMD2X/PMD-USB"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "Pieter Plaisier", email = "pieter@hanweiconsulting.com"}
+]
+keywords = ["telemetry", "hardware", "pmd2", "pmd-usb", "elmorlabs", "sensors"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = [
+  "pyserial >= 3.5"
+]
+
+[project.urls]
+Homepage = "https://github.com/ElmorLabs-P1/pmd-pycore"
+Issues = "https://github.com/ElmorLabs-P1/pmd-pycore/issues"
+
+[tool.setuptools.packages.find]
+include = ["pmd_pycore*"]
