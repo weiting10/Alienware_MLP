@@ -1,18 +1,23 @@
 """
 Wire-format structures, serial I/O, and sensor translation for ElmorLabs PMD2/PMD2X.
 
+Speed-oriented version: adds capture_pmd2_raw(), a lean capture loop that does
+no parsing, no logging and no per-sample buffer flush. Decode afterwards with
+decode_sensor_frame() + translate_pmd2_*().
+
 Example:
-    >>> from pmd_pycore.core import get_pmd2_ports, read_pmd2_device, read_pmd2_sensors
+    >>> from pmd_pycore.core.pmd2 import get_pmd2_ports, read_pmd2_device, capture_pmd2_raw
     >>> ports = get_pmd2_ports()
     >>> if ports:
     >>>     import serial
-    >>>     ser = serial.Serial(ports[0]['port'], 115200, timeout=1,
+    >>>     ser = serial.Serial(ports[0]['port'], 115200, timeout=0.05,
     >>>                          rtscts=False, dsrdtr=False)
     >>>     info = read_pmd2_device(ser)
-    >>>     sensors = read_pmd2_sensors(ser, info['ProductId'])
+    >>>     frames, stamps, failures = capture_pmd2_raw(ser, info['ProductId'], max_samples=5000)
     >>>     ser.close()
 """
 
+import gc
 import os
 import sys
 import time
@@ -21,7 +26,7 @@ import serial
 import serial.tools.list_ports
 from ctypes import LittleEndianStructure, c_uint8, c_int16, c_int32, c_uint16, sizeof
 from enum import IntEnum
-from typing import List, Dict, Optional, Union
+from typing import Callable, List, Dict, Optional, Tuple, Union
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 logger = logging.getLogger("pmd_pycore.core.pmd2")
@@ -50,6 +55,12 @@ PMD2X_SENSOR_TS_NUM = 2
 PMD2X_TS_IN = 0   # 12VHPWR connector temperature sensor, cable side
 PMD2X_TS_OUT = 1  # 12VHPWR connector temperature sensor, PSU/device side
 PMD2X_TS_NOT_CONNECTED = 0x7FFF
+
+# Optional pause (seconds) between sending a command and reading the reply in
+# read_pmd2_uart(). The blocking read already waits for the reply, so this is
+# normally unnecessary. Raise it (e.g. 0.005) only if you see dropped reads on
+# a particular unit. It does NOT apply to capture_pmd2_raw().
+CMD_GAP_S = 0.0
 
 
 class PMD2_CMD(IntEnum):
@@ -133,6 +144,11 @@ class PMD2XSensorStruct(LittleEndianStructure):
     ]
 
 
+def sensor_struct_type(product_id: int):
+    """Return the sensor struct class for a product id."""
+    return PMD2XSensorStruct if product_id == PMD2X_PRODUCT_ID else PMD2SensorStruct
+
+
 # --- Serial I/O ---
 
 # VID:PID shared by PMD2 and PMD2X (checked case-insensitively).
@@ -210,17 +226,17 @@ def find_pmd2_devices() -> List[Dict[str, str]]:
 def read_pmd2_uart(ser: serial.Serial, cmd: PMD2_CMD, size: int) -> Optional[bytes]:
     """Send a command and read `size` bytes from the device.
 
+    Flushes the input buffer first so a stale or late push can't corrupt the
+    response. This is the safe, general-purpose path used for one-off commands;
+    for high-rate sensor polling use capture_pmd2_raw() instead.
+
     Returns:
         Optional[bytes]: Raw bytes read, or None if the read was incomplete.
     """
     ser.reset_input_buffer()
     ser.write(cmd.toByte())
-    # Without a short gap the device occasionally hasn't queued its response
-    # yet when we read. 2ms was 0/5000 on a PMD2X but 2-3% failures on a
-    # PMD2 (different unit/firmware); 5ms was 0/5000 on both -- cheap
-    # insurance against a read that otherwise blocks for the full port
-    # timeout before coming back empty.
-    time.sleep(0.005)
+    if CMD_GAP_S > 0:
+        time.sleep(CMD_GAP_S)
     buffer = ser.read(size)
     if len(buffer) != size:
         logger.warning("UART read incomplete: expected %d, got %d bytes", size, len(buffer))
@@ -286,7 +302,9 @@ def read_pmd2_sensors(
     ser: serial.Serial,
     product_id: int,
 ) -> Optional[Union[PMD2SensorStruct, PMD2XSensorStruct]]:
-    """Read all sensor values from the device.
+    """Read and decode one sensor frame (safe path, one flush + one round trip).
+
+    For high-rate polling prefer capture_pmd2_raw().
 
     Args:
         ser (serial.Serial): Opened serial connection to the device.
@@ -297,12 +315,113 @@ def read_pmd2_sensors(
         Optional[Union[PMD2SensorStruct, PMD2XSensorStruct]]: Decoded sensor
             structure, or None if the read failed.
     """
-    struct_type = PMD2XSensorStruct if product_id == PMD2X_PRODUCT_ID else PMD2SensorStruct
+    struct_type = sensor_struct_type(product_id)
     buffer = read_pmd2_uart(ser, PMD2_CMD.CMD_READ_SENSOR_VALUES, sizeof(struct_type))
     if buffer is None:
         logger.warning("Failed to read sensors from device")
         return None
     return struct_type.from_buffer_copy(buffer)
+
+
+def decode_sensor_frame(buffer: bytes, product_id: int) -> Union[PMD2SensorStruct, PMD2XSensorStruct]:
+    """Decode one raw sensor frame (as returned by capture_pmd2_raw) into its struct."""
+    return sensor_struct_type(product_id).from_buffer_copy(buffer)
+
+
+def capture_pmd2_raw(
+    ser: serial.Serial,
+    product_id: int,
+    max_samples: Optional[int] = None,
+    depth: int = 1,
+    should_stop: Optional[Callable[[], bool]] = None,
+    max_consecutive_failures: int = 50,
+) -> Tuple[List[bytes], List[float], int]:
+    """Poll sensor frames as fast as the link allows, storing raw bytes only.
+
+    Per sample this does exactly one 1-byte write and one blocking read. No
+    parsing, no logging, no input-buffer flush (the buffer is flushed only to
+    recover after a failed read). Garbage collection is paused for the
+    duration to reduce jitter.
+
+    Args:
+        ser: Opened serial port. Use a timeout of ~0.05 s: a good read returns
+            as soon as the frame arrives, so the timeout only matters on failure.
+        product_id: PMD2_PRODUCT_ID or PMD2X_PRODUCT_ID.
+        max_samples: Stop after this many good frames. None = run until
+            Ctrl+C or should_stop() returns True.
+        depth: Number of requests kept in flight. 1 = classic request/response.
+            2 overlaps the next request with the current reply, hiding part of
+            the USB round-trip latency. EXPERIMENTAL: depends on the firmware
+            accepting back-to-back command bytes. Compare failures and
+            duplicate frames against depth=1 before trusting it.
+        should_stop: Optional callable polled once per sample.
+        max_consecutive_failures: Give up after this many failed reads in a row.
+
+    Returns:
+        (frames, timestamps, failures): raw frame bytes, time.perf_counter()
+        stamp of each frame's arrival, and the number of failed reads.
+    """
+    if depth < 1:
+        raise ValueError("depth must be >= 1")
+
+    size = sizeof(sensor_struct_type(product_id))
+    cmd = PMD2_CMD.CMD_READ_SENSOR_VALUES.toByte()
+    write, read, perf = ser.write, ser.read, time.perf_counter
+
+    frames: List[bytes] = []
+    stamps: List[float] = []
+    failures = 0
+    consecutive = 0
+
+    def prime():
+        ser.reset_input_buffer()
+        for _ in range(depth):
+            write(cmd)
+
+    gc_was_enabled = gc.isenabled()
+    gc.disable()
+    try:
+        prime()
+        while max_samples is None or len(frames) < max_samples:
+            if should_stop is not None and should_stop():
+                break
+            try:
+                buf = read(size)
+                if len(buf) == size:
+                    stamps.append(perf())
+                    frames.append(buf)
+                    consecutive = 0
+                    # Keep `depth` requests outstanding, but never request more
+                    # frames than we still need.
+                    if max_samples is None or (max_samples - len(frames)) > depth - 1:
+                        write(cmd)
+                    continue
+            except serial.SerialException:
+                pass
+
+            failures += 1
+            consecutive += 1
+            if consecutive >= max_consecutive_failures:
+                logger.error("Giving up after %d consecutive failed reads", consecutive)
+                break
+            try:
+                prime()
+            except serial.SerialException:
+                time.sleep(0.05)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        if gc_was_enabled:
+            gc.enable()
+        # Let any in-flight replies land, then discard them so the next
+        # command starts from a clean buffer.
+        try:
+            time.sleep(0.02)
+            ser.reset_input_buffer()
+        except serial.SerialException:
+            pass
+
+    return frames, stamps, failures
 
 
 # --- Sensor translation ---
